@@ -1,0 +1,543 @@
+{
+	"info": {
+		"_postman_id": "55fee614-3955-4113-9b5c-6ca1190f11db",
+		"name": "DEMO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27856405"
+	},
+	"item": [
+		{
+			"name": "Module_1",
+			"item": [
+				{
+					"name": "Main page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{globalUrl}}/main",
+							"host": [
+								"{{globalUrl}}"
+							],
+							"path": [
+								"main"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Settings page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{globalUrl}}/settings-list",
+							"host": [
+								"{{globalUrl}}"
+							],
+							"path": [
+								"settings-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "External service sync",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/outside-service-sync",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"outside-service-sync"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an object",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201 or 409\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 409]);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"the best object\",\n    \"content\": \"some notes\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{globalUrl}}/create",
+							"host": [
+								"{{globalUrl}}"
+							],
+							"path": [
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add lanes in random object by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 406\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 406]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"word\": \"postmantest\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{globalUrl}}/objects/id={{$randomInt}}",
+							"host": [
+								"{{globalUrl}}"
+							],
+							"path": [
+								"objects",
+								"id={{$randomInt}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete random object by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 406\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 406]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{globalUrl}}/objects/id={{$randomInt}}",
+							"host": [
+								"{{globalUrl}}"
+							],
+							"path": [
+								"objects",
+								"id={{$randomInt}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{globalToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Module_2",
+			"item": [
+				{
+					"name": "List without filters",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 29500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(29500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{globalUrl}}/objects/list",
+							"host": [
+								"{{globalUrl}}"
+							],
+							"path": [
+								"objects",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List with filters",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{globalUrl}}/objects/list?created_date={{$randomDateRecent}}&limit=50&offset=50&status=active",
+							"host": [
+								"{{globalUrl}}"
+							],
+							"path": [
+								"objects",
+								"list"
+							],
+							"query": [
+								{
+									"key": "created_date",
+									"value": "{{$randomDateRecent}}"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								},
+								{
+									"key": "offset",
+									"value": "50"
+								},
+								{
+									"key": "status",
+									"value": "active"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Object details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body contains object info\", function () {",
+									"    var responseBody = pm.response.text();",
+									"    var stringsToCheck = [\"id_generated\", \"name\", \"status\"];",
+									"",
+									"    stringsToCheck.forEach(function(string) {",
+									"        pm.expect(responseBody).to.include(string);",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{globalUrl}}/objects/list?id={{$randomInt}}",
+							"host": [
+								"{{globalUrl}}"
+							],
+							"path": [
+								"objects",
+								"list"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{$randomInt}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{globalToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Users_profiles_module",
+			"item": [
+				{
+					"name": "Data user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check that 'User' objects are not empty\", function () {",
+									"    var responseBody = pm.response.json();",
+									"",
+									"    pm.expect(responseBody).to.have.property('email').and.to.not.be.empty;",
+									"    pm.expect(responseBody).to.have.property('phone').and.to.not.be.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{globalUrl}}/users",
+							"host": [
+								"{{globalUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{globalToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "random_id",
+			"value": ""
+		}
+	]
+}
